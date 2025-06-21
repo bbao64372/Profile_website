@@ -5,27 +5,75 @@
     <title>Link Mod Skin Liên Quân</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
+            background: linear-gradient(120deg, #1e3c72, #2a5298);
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease-in;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        .logo {
+            max-width: 120px;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
         button {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
+            background-color: #ffffff;
+            color: #2a5298;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 18px;
             cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease, background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.03);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
+    <img src="logo.png" alt="Logo Mod Skin" class="logo">
     <h1>Link Mod Skin Liên Quân</h1>
-    <div id="buttonContainer">Đang tải...</div>
+    <div class="button-container" id="buttonContainer">Đang tải...</div>
 
     <script>
         fetch('data.txt')
             .then(response => response.text())
             .then(data => {
                 const container = document.getElementById('buttonContainer');
-                container.innerHTML = ''; // Xóa dòng "Đang tải..."
+                container.innerHTML = '';
                 const lines = data.split('\n').filter(line => line.trim());
                 lines.forEach(line => {
                     const [labelRaw, linkRaw] = line.split('|');
@@ -44,6 +92,9 @@
                 console.error('Lỗi khi đọc file:', error);
             });
     </script>
+
+    <footer>
+        © 2025 Mod Skin Team — Tùy biến giao diện, nâng tầm trải nghiệm
+    </footer>
 </body>
 </html>
-
