@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Link Mod Skin Liên Quân</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Link Mod Skin Liên Quân</h1>
+    <div id="buttonContainer">Đang tải...</div>
+
+    <script>
+        fetch('data.txt')
+            .then(response => response.text())
+            .then(data => {
+                const container = document.getElementById('buttonContainer');
+                container.innerHTML = ''; // Xóa dòng "Đang tải..."
+                const lines = data.split('\n').filter(line => line.trim());
+                lines.forEach(line => {
+                    const [labelRaw, linkRaw] = line.split('|');
+                    const label = labelRaw.replace(/^"|"$/g, '').trim();
+                    const link = linkRaw.trim();
+                    const button = document.createElement('button');
+                    button.textContent = label;
+                    button.onclick = () => {
+                        window.location.href = link;
+                    };
+                    container.appendChild(button);
+                });
+            })
+            .catch(error => {
+                document.getElementById('buttonContainer').textContent = 'Không thể tải dữ liệu.';
+                console.error('Lỗi khi đọc file:', error);
+            });
+    </script>
+</body>
+</html>
 
